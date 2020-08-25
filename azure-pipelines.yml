@@ -26,7 +26,7 @@ steps:
       - task: AzureCLI@2
         displayName: Azure CLI
         inputs:
-          azureSubscription: <Name of the Azure Resource Manager service connection>
+          azureSubscription: 'OmarBlacck-subscription(2)(dc3f1b56-b638-469f-a845-bef5c3cf2a72)'
           scriptType: ps
           scriptLocation: inlineScript
           inlineScript: |
