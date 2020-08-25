@@ -4,6 +4,26 @@
 # https://aka.ms/yaml
 
 trigger:
+- task: AzureCLI@2
+  inputs:
+    azureSubscription: 'OmarBlacck-subscription(dc3f1b56-b638-469f-a845-bef5c3cf2a72)'
+    scriptType: 'bash'
+    scriptLocation: 'inlineScript'
+    inlineScript: |
+      # First create a resource group
+      az group create --name DemoKubGroup --location eastus
+      
+      # Now create the AKS cluster and enable the cluster autoscaler
+      az aks create \
+        --resource-group DemoKubGroup\
+        --name myAKSCluster \
+        --node-count 1 \
+        --vm-set-type VirtualMachineScaleSets \
+        --load-balancer-sku standard \
+        --enable-cluster-autoscaler \
+        --min-count 1 \
+        --max-count 3
+    addSpnToEnvironment: true
 - master
 
 pool:
