@@ -1,0 +1,40 @@
+
+all:
+    vars:
+      ansible_connection: ssh
+      ansible_user: mysmith
+      ansible_become_method: dzdo
+      ansible_become: true
+      become: true
+
+zookeeper:
+  hosts:
+    kafka-t-brkr01:
+    kafka-t-brkr02:
+    kafka-t-brkr03:
+
+kafka_broker:
+  hosts:
+    kafka-t-brkr01:
+    kafka-t-brkr02:
+    kafka-t-brkr03:
+
+kafka_connect:
+   hosts:
+     kafka-t-pltfm01:
+
+schema_registry:
+   hosts:
+     kafka-t-pltfm01:
+
+kafka_rest:
+  hosts:
+    
+
+ksql:
+  hosts:
+     kafka-t-ksql01:
+
+control_center:
+    hosts:
+     kafka-t-admin01:

@@ -1,0 +1,41 @@
+---
+
+- name: Check
+  hosts: zookeeper
+ # hosts: zookeeper:kafka_broker:schema_registry:kafka_connect:ksql:control_center:kafka_rest
+  become: true
+
+  tasks:
+    - name: Check /usr freespace
+      shell: set -o pipefail && \
+              df -h /usr --output\=avail | tail -1
+      register: usr_freespace
+
+    - debug:
+        msg: "{{ usr_freespace.stdout }}"
+
+    - fail:
+        msg: /usr does not have the minimum space required to continue (1Gb requested).
+      when: usr_freespace.stdout| float >= 1000000
+
+    - name: check packages
+      shell: rpm -qa | grep confluent-
+      register: usr_freespace
+
+    - debug:
+        msg: "{{ usr_freespace.stdout }}"
+
+    - name: Create Backup Directory
+      file:
+          path: "/tmp/upgrade/{{ service_name }}"
+          state: directory
+          mode: 0640  
+
+
+    - name: Run Subscrition manager
+      shell: |
+        subscription-manager repos   | grep -i kafka -A1 | cat {{item.stdout_lines}}
+
+
+
+   

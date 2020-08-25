@@ -1,0 +1,39 @@
+
+all:
+    vars:
+      ansible_connection: ssh
+      ansible_user: mysmith
+      ansible_become_method: dzdo
+      ansible_become: true
+      become: true
+
+zookeeper:
+  hosts:
+
+  mysmith-adm01:
+#  mysmith-adm02:
+
+kafka_broker:
+  hosts:
+    mysmith-adm01:
+  #  mysmith-adm02:
+
+kafka_connect:
+   hosts:
+     mysmith-adm01:
+
+schema_registry:
+   hosts:
+     mysmith-adm01:
+
+kafka_rest:
+  hosts:
+    mysmith-adm01:
+
+ksql:
+  hosts:
+      mysmith-adm01:
+
+control_center:
+    hosts:
+     mysmith-adm01:
